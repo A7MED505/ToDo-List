@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">To-Do List</h1>
+        <i class="fa-solid fa-book-bookmark"></i>
+        
+        <!-- SVG Text Embed -->
+        <svg width="400" height="60">
+            <text x="10" y="40" font-family="Arial" font-size="24" fill="#ff5945">Welcome to Your To-Do List</text>
+        </svg>
+        
+
+
+        <form action="/add" method="POST">
+            <input type="text" name="task" placeholder="Add To-Do" required>
+            <button type="submit">Add</button>
+        </form>
+
+        
+        <ul class="list-group">
+            <% todolist.forEach(todo => { %>
+                <li class="list-group-item">
+                    <%= todo.task %>
+                    <form action="/delete/<%= todo._id %>" method="POST" class="float-right">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>
