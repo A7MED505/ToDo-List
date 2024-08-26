@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
     <link rel="stylesheet" href="/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
 </head>
 <body>
+
+    <div class="toggle-container">
+        <i id="darkModeIcon" class="fas fa-sun"></i> <!-- Default icon for light mode -->
+    </div>
+
     <div class="container">
         <h1 class="text-center">To-Do List</h1>
 
@@ -39,14 +45,56 @@
             <% }); %>
         </ul>
     </div>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.date').forEach(function(element) {
-                const dateText = element.innerText;
-                element.innerText = moment(dateText).format('MMM Do YY');
+        document.querySelectorAll('.date').forEach(function(element) {
+            const dateText = element.innerText;
+            
+            // Parse the date using Moment.js
+            const parsedDate = moment(new Date(dateText));
+            
+            if (parsedDate.isValid()) {
+                element.innerText = parsedDate.format('MMM Do YY');
+            } else {
+                console.warn('Date format is not recognized:', dateText);
+            }
+        });
+
+            const icon = document.getElementById('darkModeIcon');
+
+            // Check localStorage for dark mode preference
+            const darkModeStatus = localStorage.getItem('darkMode');
+            if (darkModeStatus === 'enabled') {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+
+            icon.addEventListener('click', function() {
+                if (document.body.classList.contains('dark-mode')) {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('darkMode', 'disabled');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'enabled');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
             });
+
+            // If system preference is dark and no preference is stored, enable dark mode by default
+            if (darkModeStatus === null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'enabled');
+            }
         });
     </script>
+    
 </body>
 </html>
