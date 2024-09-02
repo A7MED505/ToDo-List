@@ -1,3 +1,66 @@
+/* Toggle Container */
+.toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 24px; /* Adjust size as needed */
+}
+
+.toggle-container i {
+    transition: color 0.3s;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: linear-gradient(135deg, #0d1f4a, #320a42);
+    color: #e0e0e0;
+}
+
+body.dark-mode h1 {
+    color: #ffffff;
+}
+
+body.dark-mode .container {
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode form {
+    background-color: #444;
+}
+
+body.dark-mode form input[type="text"],
+body.dark-mode form input[type="date"],
+body.dark-mode form select {
+    background-color: #555;
+    color: #fff;
+}
+
+body.dark-mode .list-group-item {
+    background-color: #444;
+    border-color: #555;
+}
+
+body.dark-mode .list-group-item:hover {
+    background-color: #555;
+}
+
+body.dark-mode form button.add {
+    background-color: #ff7f6a;
+}
+
+body.dark-mode form button.complete {
+    background-color: #34d058;
+}
+
+body.dark-mode form button.delete {
+    background-color: #f34f6f;
+}
+
 /* General Styles */
 body {
     width: 100%;
