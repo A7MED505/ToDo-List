@@ -11,22 +11,43 @@
 <body>
 
     <div class="toggle-container">
-        <i id="darkModeIcon" class="fas fa-sun"></i> <!-- Default icon for light mode -->
+        <i id="darkModeIcon" class="fas fa-sun"></i> 
     </div>
 
     <div class="container">
         <h1 class="text-center">To-Do List</h1>
 
-        <form action="/add" method="POST">
-            <input type="text" name="task" placeholder="Add To-Do" required>
-            <select name="priority">
-                <option value="Low">Low</option>
-                <option value="Medium" selected>Medium</option>
-                <option value="High">High</option>
-            </select>
-            <input type="date" name="dueDate">
-            <button type="submit" class="add">Add</button>
+        <form action="/add" method="POST" class="todo-form">
+            <div class="form-group input-group">
+                <input type="text" name="task" placeholder="Add To-Do" required class="form-input">
+            </div>
+            
+            <div class="form-group select-group">
+                <label class="priority-option">
+                    <input type="radio" name="priority" value="Low" checked>
+                    <i class="fas fa-smile"></i> Low
+                </label>
+                <label class="priority-option">
+                    <input type="radio" name="priority" value="Medium">
+                    <i class="fas fa-meh"></i> Medium
+                </label>
+                <label class="priority-option">
+                    <input type="radio" name="priority" value="High">
+                    <i class="fas fa-frown"></i> High
+                </label>
+            </div>
+            
+            
+            <div class="form-group date-group">
+                <input type="date" name="dueDate" class="form-date">
+            </div>
+            
+            <div class="form-group button-group">
+                <button type="submit" class="form-button add">Add</button>
+            </div>
         </form>
+        
+        
 
         <ul class="list-group">
             <% todolist.forEach(todo => { %>

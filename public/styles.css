@@ -1,154 +1,139 @@
-/* Toggle Container */
-.toggle-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 24px; /* Adjust size as needed */
-}
-
-.toggle-container i {
-    transition: color 0.3s;
-}
-
-/* Dark Mode Styles */
-body.dark-mode {
-    background: linear-gradient(135deg, #0d1f4a, #320a42);
-    color: #e0e0e0;
-}
-
-body.dark-mode h1 {
-    color: #ffffff;
-}
-
-body.dark-mode .container {
-    background-color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode form {
-    background-color: #444;
-}
-
-body.dark-mode form input[type="text"],
-body.dark-mode form input[type="date"],
-body.dark-mode form select {
-    background-color: #555;
-    color: #fff;
-}
-
-body.dark-mode .list-group-item {
-    background-color: #444;
-    border-color: #555;
-}
-
-body.dark-mode .list-group-item:hover {
-    background-color: #555;
-}
-
-body.dark-mode form button.add {
-    background-color: #ff7f6a;
-}
-
-body.dark-mode form button.complete {
-    background-color: #34d058;
-}
-
-body.dark-mode form button.delete {
-    background-color: #f34f6f;
-}
+/* styles.css */
 
 /* General Styles */
 body {
-    width: 100%;
     min-height: 100vh;
     background: linear-gradient(135deg, #153677, #4e085f);
-    padding: 0; /* Resetting padding for consistency */
-    margin: 0; /* Ensuring no default margin affects layout */
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Roboto', sans-serif;
+    color: #000;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* Container */
 .container {
     width: 100%;
-    max-width: 540px; /* Ensuring the maximum width for larger screens */
+    max-width: 540px;
     background-color: #fff;
-    padding: 50px 40px; /* Adjusted padding for consistent spacing */
+    padding: 40px 30px 70px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 0 auto; /* Centering container horizontally */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Responsive container for small screens */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px 35px;
+    }
 }
 
 /* Header */
 h1 {
-    font-size: 2.5rem; /* Font size for consistent header appearance */
-    margin: 0; /* Removed margin for tighter spacing */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
     color: #002765;
+    text-align: center;
+}
+
+/* Responsive header for small screens */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
 }
 
 /* Form Styles */
-form {
+.todo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.priority-option {
     display: flex;
     align-items: center;
-    background-color: #edeef0;
-    border-radius: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 8px;
-    gap: 0px; /* Added gap for spacing between input and button */
+    cursor: pointer;
+    gap: 5px;
+    font-size: 16px;
 }
 
-form input[type="text"],
-form input[type="date"],
-form select {
-    flex: 1;
-    width: 100%;
-    border: none;
-    outline: none;
-    background-color: transparent;
+.priority-option input[type="radio"] {
+    display: none;
+}
+
+.priority-option i {
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.priority-option input[type="radio"]:checked + i {
+    color: #ff5945; /* Change icon color when selected */
+}
+
+.form-input,
+.form-date {
     padding: 12px;
-    font-size: 13px;
-    padding-left: 20px;
+    border: 1px solid #ced4da;
     border-radius: 30px;
+    font-size: 16px;
+    width: 100%;
+    background-color: #edeef0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
 }
 
-form button {
+.form-input:focus,
+.form-date:focus {
+    outline: none;
+    border-color: #ff5945;
+}
+
+.form-button {
     border: none;
     cursor: pointer;
-    padding: 15px 30px; /* Adjusted padding for proper button size */
+    outline: none;
+    padding: 15px 50px;
     border-radius: 30px;
-    /*background-color: #ff5945;
-    color: #fff;*/
-    font-size: 12px;
-    transition: all .25s ease;
-}
-
-form button.add {
-    background-color: #ff5945; /* Original color for add button */
+    background-color: #ff5945;
     color: #fff;
+    font-size: 18px;
+    transition: all .25s ease;
+    width: 100%;
 }
 
-form button.add:hover {
+.form-button:hover {
     filter: brightness(.8);
     transform: scale(1.05);
 }
 
 /* List Styles */
+.list-group {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
 .list-group-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     border: 1px solid #ced4da;
-    border-radius: 20px;
+    border-radius: 8px;
     margin-bottom: 10px;
     background-color: #ffffff;
     transition: background-color 0.3s, box-shadow 0.3s;
@@ -159,33 +144,160 @@ form button.add:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Delete Button */
-.list-group-item form button.delete {
-    background-color: #dc3545; /* Red background for delete button */
-    color: #fff;
-    padding: 5px 10px;
-    font-size: 14px; /* Adjusted font size for consistency */
-}
-
-.list-group-item form button.delete:hover {
-    background-color: #ad1726;
-    transform: scale(1.05);
-}
-
-/* Complete Button */
-form button.complete {
-    background-color: #28a745; /* Green background for complete button */
-    color: #fff;
+/* Button Styles */
+.list-group-item .complete,
+.list-group-item .delete {
     border: none;
+    border-radius: 4px;
+    color: #ffffff;
     cursor: pointer;
-    padding: 6px 15px; /* Adjusted padding for proper button size */
-    border-radius: 30px;
-    font-size: 12px;
-    transition: all .25s ease;
+    padding: 5px 10px;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-form button.complete:hover {
-    background-color:#105f23;
+.list-group-item .complete {
+    background-color: #28a745;
+}
+
+.list-group-item .complete:hover {
+    background-color: #218838;
     transform: scale(1.05);
 }
+
+.list-group-item .delete {
+    background-color: #dc3545;
+}
+
+.list-group-item .delete:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Toggle Dark Mode Button */
+.toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000000;
+    transition: color 0.3s;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background: linear-gradient(135deg, #333, #111);
+    color: #ddd;
+}
+
+body.dark-mode .container {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .form-input,
+body.dark-mode .form-date {
+    background-color: #2c2c2c;
+    border-color: #444;
+    color: #ddd;
+}
+
+body.dark-mode .form-input:focus,
+body.dark-mode .form-date:focus {
+    border-color: #ff5945;
+}
+
+body.dark-mode .form-button {
+    background-color: #ff5945;
+    color: #fff;
+}
+
+body.dark-mode .list-group-item {
+    background-color: #333;
+    border-color: #444;
+}
+
+body.dark-mode .list-group-item:hover {
+    background-color: #444;
+}
+
+body.dark-mode .list-group-item .complete {
+    background-color: #28a745;
+}
+
+body.dark-mode .list-group-item .delete {
+    background-color: #dc3545;
+}
+
+body.dark-mode .toggle-container {
+    color: #ddd;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .priority-option {
+        font-size: 14px;
+    }
+
+    .priority-option i {
+        font-size: 18px;
+    }
+
+    .form-input,
+    .form-date,
+    .form-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .list-group-item {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .list-group-item .complete,
+    .list-group-item .delete {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .toggle-container {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .priority-option {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .priority-option i {
+        font-size: 16px;
+    }
+
+    .form-input,
+    .form-date,
+    .form-button {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .list-group-item {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .list-group-item .complete,
+    .list-group-item .delete {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+
+    .toggle-container {
+        font-size: 18px;
+    }
+}
+
 
