@@ -80,7 +80,7 @@ h1 {
 }
 
 .priority-option input[type="radio"]:checked + i {
-    color: #ff5945; /* Change icon color when selected */
+    color: #ff5945; 
 }
 
 .form-input,
