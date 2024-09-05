@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>About</title>
+    <link rel="stylesheet" href="/about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 </head>
 
 <body>
-
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <button id="sidebarClose" class="sidebar-close"></button>
@@ -36,74 +34,36 @@
     </div>
 
     <div class="container">
-        <h1 class="text-center">To-Do List</h1>
+        <h1 class="text-center">About Us</h1>
 
-        <form action="/add" method="POST" class="todo-form">
-            <div class="form-group input-group">
-                <input type="text" name="task" placeholder="Add To-Do" required class="form-input">
-            </div>
-
-            <div class="form-group select-group">
-                <label class="priority-option">
-                    <input type="radio" name="priority" value="Low" checked>
-                    <i class="fas fa-smile"></i> Low
-                </label>
-                <label class="priority-option">
-                    <input type="radio" name="priority" value="Medium">
-                    <i class="fas fa-meh"></i> Medium
-                </label>
-                <label class="priority-option">
-                    <input type="radio" name="priority" value="High">
-                    <i class="fas fa-frown"></i> High
-                </label>
-            </div>
-
-            <div class="form-group date-group">
-                <input type="date" name="dueDate" class="form-date">
-            </div>
-
-            <div class="form-group button-group">
-                <button type="submit" class="form-button add">Add</button>
-            </div>
-        </form>
-
-        <ul class="list-group">
-            <% todolist.forEach(todo => { %>
-                <li class="list-group-item">
-                    <span><%= todo.task %></span> - <span><%= todo.priority %></span> - <span class="date"><%= todo.dueDate %></span>
-                    <% if (!todo.completed) { %>
-                        <form action="/complete/<%= todo._id %>" method="POST" class="float-right">
-                            <button type="submit" class="complete">Complete</button>
-                        </form>
-                    <% } %>
-
-                    <form action="/delete/<%= todo._id %>" method="POST" class="float-right">
-                        <button type="submit" class="delete">Delete</button>
-                    </form>
-                </li>
-            <% }); %>
-        </ul>
+        <main>
+            <section>
+                <h2>Our Mission</h2>
+                <p>
+                    Welcome to our to-do list application! Our mission is to help you stay organized and productive. We aim to provide a simple, yet powerful tool to manage your tasks and priorities effectively.
+                </p>
+            </section>
+            <section>
+                <h2>Our Team</h2>
+                <p>
+                    We are a dedicated team of developers and designers passionate about productivity and user experience. Our team works tirelessly to bring you the best tools for managing your daily tasks.
+                </p>
+            </section>
+            <section>
+                <h2>Contact Us</h2>
+                <p>
+                    If you have any questions or feedback, feel free to reach out to us at <a href="https://github.com/" class="link">github.com</a>.
+                </p>
+            </section>
+        </main>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 
     <script>
+        // JavaScript for dark mode toggle
         document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.date').forEach(function (element) {
-                const dateText = element.innerText;
-
-                // Parse the date using Moment.js
-                const parsedDate = moment(new Date(dateText));
-
-                if (parsedDate.isValid()) {
-                    element.innerText = parsedDate.format('MMM Do YY');
-                } else {
-                    console.warn('Date format is not recognized:', dateText);
-                }
-            });
-
             const icon = document.getElementById('darkModeIcon');
 
             // Check localStorage for dark mode preference
@@ -252,7 +212,6 @@
             document.getElementById('sidebar').classList.remove('sidebar-open');
         });
     </script>
-
 </body>
 
 </html>

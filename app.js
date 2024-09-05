@@ -1,11 +1,10 @@
+// app.js file:
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
-
-
-
 
 // Load environment variables
 require('dotenv').config();
@@ -30,4 +29,5 @@ app.use('/', require('./routes/index'));
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
+
 });
