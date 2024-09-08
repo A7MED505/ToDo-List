@@ -73,7 +73,7 @@ h1 {
     border: 1px solid #ced4da;
     border-radius: 30px;
     font-size: 16px;
-    width: 100%;
+    width: 95%;
     background-color: #edeef0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s;
@@ -106,18 +106,20 @@ h1 {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Start hidden off-screen */
-    width: 250px;
+    left: -300px; /* Start hidden off-screen */
+    width: 300px;
     height: 100%;
-    background-color: #333;
+    background: linear-gradient(135deg, #3f3f3f, #000000);
     color: #fff;
-    transition: left 0.3s ease;
+    transition: left 0.3s ease, box-shadow 0.3s ease;
     z-index: 1000; /* Ensure sidebar is above other content */
     overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-right: 1px solid #444; /* Subtle separation from content */
 }
 
 .sidebar.sidebar-open {
-    left: 0; /* Move sidebar into view */
+    left: 0; 
 }
 
 .sidebar-close {
@@ -129,12 +131,18 @@ h1 {
     color: #fff;
     background: none;
     border: none;
+    transition: color 0.3s;
+}
+
+.sidebar-close:hover {
+    color: #ff5945; /* Highlight color on hover */
 }
 
 .sidebar h2 {
-    padding: 20px;
-    font-size: 1.5rem;
+    padding: 25px;
+    font-size: 2rem;
     border-bottom: 1px solid #444;
+    color: #ff5945; /* Consistent with button color */
 }
 
 .sidebar ul {
@@ -157,11 +165,12 @@ h1 {
     text-align: left;
     padding: 10px;
     border-bottom: 1px solid #444;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .sidebar ul li button:hover {
     background-color: #555;
+    color: #ff5945; /* Highlight color on hover */
 }
 
 /* Sidebar Toggle Button */
@@ -256,11 +265,11 @@ body.dark-mode .toggle-container {
 
     .sidebar {
         width: 100%;
-        left: -100%; /* Hide off-screen */
+        left: -100%; 
     }
 
     .sidebar.sidebar-open {
-        left: 0; /* Move sidebar into view */
+        left: 0; 
     }
 
     .sidebar ul li button {

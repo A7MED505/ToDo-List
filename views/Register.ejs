@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Register</title>
+    <link rel="stylesheet" href="/register.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 </head>
 
 <body>
-
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
-        <button id="sidebarClose" class="sidebar-close"></button>
+    <div id="navigationSidebar" class="sidebar">
+        <button id="closeSidebarButton" class="sidebar-close"></button>
         <h2>To-Do</h2>
         <ul>
             <li><button onclick="location.href='/'">Add Task</button></li>
@@ -25,86 +23,50 @@
     </div>
 
     <!-- Sidebar Toggle Button -->
-    <div id="sidebarToggle" class="sidebar-toggle">
+    <div id="toggleSidebarButton" class="sidebar-toggle">
         <i class="fas fa-bars"></i>
     </div>
 
-    <div id="particles-js"></div>
+    <div id="particlesContainer"></div>
 
     <div class="toggle-container">
-        <i id="darkModeIcon" class="fas fa-sun"></i>
+        <i id="themeToggleIcon" class="fas fa-sun"></i>
     </div>
 
     <div class="container">
-        <h1 class="text-center">To-Do List</h1>
+        <h1 class="text-center">Register</h1>
 
-        <form action="/add" method="POST" class="todo-form">
-            <div class="form-group input-group">
-                <input type="text" name="task" placeholder="Add To-Do" required class="form-input">
+        <form action="/register" method="POST" class="register-form">
+            <div class="form-group">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required class="form-input">
             </div>
 
-            <div class="form-group select-group">
-                <label class="priority-option">
-                    <input type="radio" name="priority" value="Low" checked>
-                    <i class="fas fa-smile"></i> Low
-                </label>
-                <label class="priority-option">
-                    <input type="radio" name="priority" value="Medium">
-                    <i class="fas fa-meh"></i> Medium
-                </label>
-                <label class="priority-option">
-                    <input type="radio" name="priority" value="High">
-                    <i class="fas fa-frown"></i> High
-                </label>
+            <div class="form-group">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required class="form-input">
             </div>
 
-            <div class="form-group date-group">
-                <input type="date" name="dueDate" class="form-date">
+            <div class="form-group">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required class="form-input">
             </div>
 
             <div class="form-group button-group">
-                <button type="submit" class="form-button add">Add</button>
+                <button type="submit" class="form-button">Register</button>
             </div>
         </form>
 
-        <ul class="list-group">
-            <% todolist.forEach(todo => { %>
-                <li class="list-group-item">
-                    <span><%= todo.task %></span> - <span><%= todo.priority %></span> - <span class="date"><%= todo.dueDate %></span>
-                    <% if (!todo.completed) { %>
-                        <form action="/complete/<%= todo._id %>" method="POST" class="float-right">
-                            <button type="submit" class="complete">Complete</button>
-                        </form>
-                    <% } %>
-
-                    <form action="/delete/<%= todo._id %>" method="POST" class="float-right">
-                        <button type="submit" class="delete">Delete</button>
-                    </form>
-                </li>
-            <% }); %>
-        </ul>
+        <p class="text-center">Already have an account? <a href="/login" class="link">Login here</a></p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
 
     <script>
+        // JavaScript for dark mode toggle
         document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.date').forEach(function (element) {
-                const dateText = element.innerText;
-
-                // Parse the date using Moment.js
-                const parsedDate = moment(new Date(dateText));
-
-                if (parsedDate.isValid()) {
-                    element.innerText = parsedDate.format('MMM Do YY');
-                } else {
-                    console.warn('Date format is not recognized:', dateText);
-                }
-            });
-
-            const icon = document.getElementById('darkModeIcon');
+            const icon = document.getElementById('themeToggleIcon');
 
             // Check localStorage for dark mode preference
             const darkModeStatus = localStorage.getItem('darkMode');
@@ -137,7 +99,7 @@
             }
         });
 
-        particlesJS('particles-js', {
+        particlesJS('particlesContainer', {
             particles: {
                 number: {
                     value: 80,
@@ -244,15 +206,14 @@
         });
 
         // JavaScript for sidebar toggle
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.toggle('sidebar-open');
+        document.getElementById('toggleSidebarButton').addEventListener('click', function () {
+            document.getElementById('navigationSidebar').classList.toggle('sidebar-open');
         });
 
-        document.getElementById('sidebarClose').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.remove('sidebar-open');
+        document.getElementById('closeSidebarButton').addEventListener('click', function () {
+            document.getElementById('navigationSidebar').classList.remove('sidebar-open');
         });
     </script>
-
 </body>
 
 </html>
