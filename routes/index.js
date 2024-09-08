@@ -71,4 +71,16 @@ router.get('/about', (req, res) => {
     res.render('about');
 });
 
+// Register page route
+router.get('/register', (req, res) => {
+    res.render('Register');
+});
+
+// Handle registration form submission
+router.post('/register', (req, res) => {
+    // Add your registration logic here
+    // For example, save user data to the database
+    res.redirect('/login'); // Redirect to login after registration
+});
+
 module.exports = router;
