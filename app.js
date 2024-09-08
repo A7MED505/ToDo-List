@@ -4,7 +4,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+
+// Use environment variable for port or default to 3000
+const port = process.env.PORT || 3000;
 
 // Load environment variables
 require('dotenv').config();
@@ -27,7 +29,7 @@ app.set('view engine', 'ejs');
 // Routes
 app.use('/', require('./routes/index'));
 
+// Start server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-
 });
