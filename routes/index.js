@@ -3,9 +3,19 @@ const router = express.Router();
 const Todo = require('../models/Todo');
 const { body, validationResult } = require('express-validator');
 
-// Get all todo list
-router.get('/', async (req, res) => {
+// Render the login page as the main page
+router.get('/', (req, res) => {
+    res.render('login'); 
+});
+
+// Render the todo list
+router.get('/tasks', async (req, res) => {
     try {
+        // Check if user is authenticated
+        if (!req.session.user) {
+            return res.redirect('/login');
+        }
+        
         const todolist = await Todo.find();
         res.render('index', { todolist });
     } catch (error) {
@@ -32,7 +42,7 @@ router.post('/add', [
             dueDate: req.body.dueDate
         });
         await newTodo.save();
-        res.redirect('/');
+        res.redirect('/tasks');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -43,7 +53,7 @@ router.post('/add', [
 router.post('/delete/:id', async (req, res) => {
     try {
         await Todo.findByIdAndDelete(req.params.id);
-        res.redirect('/');
+        res.redirect('/tasks');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -54,7 +64,7 @@ router.post('/delete/:id', async (req, res) => {
 router.post('/complete/:id', async (req, res) => {
     try {
         await Todo.findByIdAndUpdate(req.params.id, { completed: true });
-        res.redirect('/');
+        res.redirect('/tasks');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
