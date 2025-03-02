@@ -1,21 +1,34 @@
 const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     task: {
         type: String,
-        required: true,  // Ensure that 'task' is always provided
+        required: true,
+        minlength: 3,
+        maxlength: 100
     },
     completed: {
         type: Boolean,
-        default: false,  // Defaults to false, meaning the task is not completed by default
+        default: false
     },
     priority: {
         type: String,
-        enum: ['Low', 'Medium', 'High'],  // Valid values for priority
-        default: 'Medium',  // Default value if none is provided
+        enum: ['Low', 'Medium', 'High'],
+        default: 'Medium'
     },
     dueDate: {
-        type: Date,  // Date field for task due date
+        type: Date,
+        validate: {
+            validator: function (value) {
+                return value > new Date();
+            },
+            message: 'Due date must be in the future.'
+        }
     }
 }, { timestamps: true });
 
